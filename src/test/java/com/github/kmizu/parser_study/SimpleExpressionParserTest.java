@@ -1,7 +1,6 @@
 package com.github.kmizu.parser_study;
 
 import org.junit.Test;
-import org.junit.experimental.theories.suppliers.TestedOn;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
@@ -9,9 +8,9 @@ import static org.junit.Assert.assertEquals;
 
 
 @RunWith(JUnit4.class)
-public class ArithmeticParserTest {
+public class SimpleExpressionParserTest {
     static int evaluate(String input) throws Exception {
-        return new ArithmeticAst.Evaluator().evaluate(input);
+        return new SimpleExpressionAst.Evaluator().evaluate(input);
     }
 
     @Test
@@ -70,11 +69,6 @@ public class ArithmeticParserTest {
         assertEquals(0, evaluate("1/2"));
         assertEquals(2, evaluate("2/1"));
         assertEquals(2, evaluate("4/2"));
-    }
-
-    @Test
-    public void testComplexExpression() throws Exception {
-        assertEquals(2, evaluate("(1 + 2) * 3 / 4"));
     }
 
     @Test

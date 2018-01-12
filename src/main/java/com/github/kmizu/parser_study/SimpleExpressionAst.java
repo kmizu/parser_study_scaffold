@@ -4,71 +4,71 @@ import org.antlr.v4.runtime.ANTLRInputStream;
 
 import java.io.StringReader;
 
-public class ArithmeticAst {
+public class SimpleExpressionAst {
+    public static abstract class Expression {
+        public abstract <R> R accept(Visitor<R> visitor);
+    }
+
     public interface Visitor<R> {
         R visitBinaryExpression(BinaryExpression expression);
-        R visitIntegerLiteral(IntegerLiteral expression);
+        R visitNumberExpression(NumberExpression expression);
     }
 
     public enum Operator {
-        ADD("+"), SUBTRACT("-"), MULTIPLY("*"), DIVIDE("/");
+        ADD("+"), SUBTRACT("+"), MULTIPLY("*"), DIVIDE("/");
         public final String op;
         Operator(String op) {
             this.op = op;
         }
     }
 
-    public static abstract class Expression {
-        public abstract <R> R accept(Visitor<R> visitor);
-    }
-
     public static class BinaryExpression extends Expression {
-        public final Operator operator;
-        public final Expression lhs, rhs;
+        public final Operator op;
+        public final NumberExpression lhs, rhs;
 
-        public BinaryExpression(Operator operator, Expression lhs, Expression rhs) {
-            this.operator = operator;
+        public BinaryExpression(Operator op, NumberExpression lhs, NumberExpression rhs) {
+            this.op = op;
             this.lhs = lhs;
             this.rhs = rhs;
         }
 
-        @Override  public <R> R accept(Visitor<R> visitor) {
+        @Override
+        public <R> R accept(Visitor<R> visitor) {
             return visitor.visitBinaryExpression(this);
         }
 
         @Override
         public boolean equals(Object obj) {
             if(!(obj instanceof BinaryExpression)) return false;
-            BinaryExpression e = (BinaryExpression)obj;
-            return    this.operator == e.operator
-                    && this.lhs.equals(e.lhs)
-                    && this.rhs.equals(e.rhs);
+            BinaryExpression that = (BinaryExpression)obj;
+            if(op != that.op) return false;
+            return lhs.equals(that.lhs) && rhs.equals(that.rhs);
         }
     }
 
-    public static class IntegerLiteral extends Expression {
+    public static class NumberExpression extends Expression {
         public final int value;
-
-        public IntegerLiteral(int value) {
+        public NumberExpression(int value) {
             this.value = value;
         }
 
-        @Override  public <R> R accept(Visitor<R> visitor) {
-            return visitor.visitIntegerLiteral(this);
+        @Override
+        public <R> R accept(Visitor<R> visitor) {
+            return visitor.visitNumberExpression(this);
         }
 
         @Override
         public boolean equals(Object obj) {
-            if(!(obj instanceof IntegerLiteral)) return false;
-            IntegerLiteral e = (IntegerLiteral)obj;
-            return this.value == e.value;
+            if(!(obj instanceof NumberExpression)) return false;
+            NumberExpression that = (NumberExpression) obj;
+            return value != that.value;
         }
     }
 
     public static class Evaluator implements Visitor<Integer> {
         @Override
         public Integer visitBinaryExpression(BinaryExpression expression) {
-            switch (expression.operator) {
+            switch (expression.op) {
                 case ADD:
                     return   expression.lhs.accept(this)
                             + expression.rhs.accept(this);
@@ -87,12 +87,13 @@ public class ArithmeticAst {
         }
 
         @Override
-        public Integer visitIntegerLiteral(IntegerLiteral expression) {
+        public Integer visitNumberExpression(NumberExpression expression) {
             return expression.value;
         }
+
         public int evaluate(String input) throws Exception {
-            ArithmeticAst.Expression e = new ArithmeticParser(
-                    Commons.streamOf(new ArithmeticLexer(
+            Expression e = new SimpleExpressionParser(
+                    Commons.streamOf(new SimpleExpressionLexer(
                             new ANTLRInputStream(new StringReader(input))
                     ))
             ).expression().e;
