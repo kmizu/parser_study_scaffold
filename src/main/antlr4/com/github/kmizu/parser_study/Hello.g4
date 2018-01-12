@@ -1,5 +1,5 @@
 grammar Hello;
 
 hello returns [String value]
-  : 'Hello, World!' {$value = "Hello, World!";}
+  : 'Hello, World!' {$value = /* fill there and remove "" */ "";}
   ;

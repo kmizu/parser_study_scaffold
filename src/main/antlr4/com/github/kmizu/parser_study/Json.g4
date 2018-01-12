@@ -17,41 +17,34 @@ jarray returns [JArray value]
    @init {
      List<JValue> elements = new ArrayList<JsonAst.JValue>();
    }
-   : '['
-        (v=jvalue {elements.add($v.value);} (',' v=jvalue {elements.add($v.value);})*)?
-     ']' {$value = new JsonAst.JArray(elements);}
+   : EOF /* fill there and remove EOF */
    ;
 
 jobject returns [JObject value]
    @init {
      List<JPair<String, JValue>> fields = new ArrayList<JPair<String, JValue>>();
    }
-   : '{'
-        (
-          p=pair {fields.add($p.value);} (',' p=pair {fields.add($p.value);})*
-        )?
-     '}' {$value = new JsonAst.JObject(fields);}
+   : EOF /* fill there and remove EOF */
    ;
 
 pair returns [JPair value]
-  : k=jstring ':' v=jvalue {$value = new JPair<String, JValue>($k.value.value, $v.value);}
-  ;
+   : EOF /* fill there and remove EOF */
+   ;
 
 jstring returns [JString value]
-   : s=STRING {$value = new JString($s.getText().substring(1, $s.getText().length() - 1));}
+   : EOF /* fill there and remove EOF */
    ;
 
 jnull returns [JNull value]
-   : v=NULL {$value = JNull.instance;}
+   : EOF /* fill there and remove EOF */
    ;
 
 jnumber returns [JNumber value]
-   : n=NUMBER {$value = new JNumber(Integer.parseInt($n.getText()));}
+   : EOF
    ;
 
 jboolean returns [JBoolean value]
-   : TRUE  {$value = new JsonAst.JBoolean(true);}
-   | FALSE {$value = new JsonAst.JBoolean(false);}
+   : EOF
    ;
 
 NUMBER
