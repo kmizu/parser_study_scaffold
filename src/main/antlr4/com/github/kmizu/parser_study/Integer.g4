@@ -5,7 +5,7 @@ integer returns [int value]
    ;
 
 INTEGER
-   : EOF /* fill there and remove EOF */
+   : EOF /* fill them and remove EOF */
    ;
 fragment Zero : '0';
 fragment DigitFirst : '1' | '2' | '3'| '4' | '5' | '6'

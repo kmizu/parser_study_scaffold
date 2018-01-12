@@ -9,15 +9,15 @@ expression returns [Expression e]
    ;
 
 additive returns [Expression e]
-    : fake /* Fill there and remove EOF */
+    : fake /* fill them and remove EOF */
     ;
 
 multitive returns [Expression e]
-    : fake /* Fill there and remove EOF */
+    : fake /* fill them and remove EOF */
     ;
 
 primary returns [Expression e]
-    : fake /* Fill there and remove fake */
+    : fake /* fill them and remove fake */
     ;
 
 number returns [int value]

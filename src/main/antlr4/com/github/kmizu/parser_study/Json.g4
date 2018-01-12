@@ -17,26 +17,26 @@ jarray returns [JArray value]
    @init {
      List<JValue> elements = new ArrayList<JsonAst.JValue>();
    }
-   : EOF /* fill there and remove EOF */
+   : EOF /* fill them and remove EOF */
    ;
 
 jobject returns [JObject value]
    @init {
      List<JPair<String, JValue>> fields = new ArrayList<JPair<String, JValue>>();
    }
-   : EOF /* fill there and remove EOF */
+   : EOF /* fill them and remove EOF */
    ;
 
 pair returns [JPair value]
-   : EOF /* fill there and remove EOF */
+   : EOF /* fill them and remove EOF */
    ;
 
 jstring returns [JString value]
-   : EOF /* fill there and remove EOF */
+   : EOF /* fill them and remove EOF */
    ;
 
 jnull returns [JNull value]
-   : EOF /* fill there and remove EOF */
+   : EOF /* fill them and remove EOF */
    ;
 
 jnumber returns [JNumber value]

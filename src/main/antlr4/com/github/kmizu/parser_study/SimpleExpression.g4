@@ -5,7 +5,7 @@ grammar SimpleExpression;
 }
 
 expression returns [SimpleExpressionAst.Expression e]
-   : EOF /* fill there and remove EOF */
+   : EOF /* fill them and remove EOF */
    ;
 
 number returns [SimpleExpressionAst.NumberExpression value]
