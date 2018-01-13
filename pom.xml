@@ -71,6 +71,9 @@
                     <source>1.8</source>
                     <target>1.8</target>
                     <encoding>UTF-8</encoding>
+                    <compilerArgs>
+                        <arg>-Xlint:unchecked</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
             <plugin>

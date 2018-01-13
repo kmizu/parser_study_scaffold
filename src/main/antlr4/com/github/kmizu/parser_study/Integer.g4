@@ -4,11 +4,7 @@ integer returns [int value]
    : n=INTEGER {$value = Integer.parseInt($n.getText());}
    ;
 
-INTEGER
-   : EOF /* fill them and remove EOF */
-   ;
-fragment Zero : '0';
-fragment DigitFirst : '1' | '2' | '3'| '4' | '5' | '6'
-           | '7' | '8' | '9';
-fragment DigitRest: '0' | '1' | '2' | '3'| '4' | '5' | '6'
-           | '7' | '8' | '9';
+INTEGER : ' ' ;
+fragment Zero : ' ';
+fragment DigitFirst : ' ';
+fragment DigitRest: ' ';

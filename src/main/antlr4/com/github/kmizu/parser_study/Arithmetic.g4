@@ -29,11 +29,5 @@ fake returns [Object nothing]
    ;
 
 NUMBER: ('0' | [1-9] [0-9]*);
-PLUS:  '+';
-MINUS: '-';
-STAR:  '*';
-SLASH: '/';
-LP:    '(';
-RP:    ')';
 
 WS  :   [ \t\n\r]+ -> skip ;

@@ -171,6 +171,7 @@ public class JsonAst {
         return new JArray(Arrays.asList(elements));
     }
 
+    @SafeVarargs
     public static JObject jobject(JPair<String, JValue>... fields) {
         return new JObject(Arrays.asList(fields));
     }

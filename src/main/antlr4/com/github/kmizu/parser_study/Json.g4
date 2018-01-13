@@ -67,38 +67,6 @@ STRING
    : '"' (ESC | ~ ["\\])* '"'
    ;
 
-LBRACKET
-   : '['
-   ;
-
-COMMA
-   : ','
-   ;
-
-RBRACKET
-   : ']'
-   ;
-
-LBRACE
-   : '{'
-   ;
-
-RBRACE
-   : '}'
-   ;
-
-LP
-   : '('
-   ;
-
-RP
-   :')'
-   ;
-
-COLON
-   : ':'
-   ;
-
 WS  :   [ \t\n\r]+ -> skip ;
 
 fragment ESC : '\\' (["\\/bfnrt]);
